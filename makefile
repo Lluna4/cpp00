@@ -1,11 +1,11 @@
-NAME		=	megaphone
+NAME		=	phone_book
 
 CC			=	clang++
 INCLUDES	=	includes
-CPPFLAGS	=	-Wall -Werror -Wextra -I$(INCLUDES)
+CPPFLAGS	=	-I$(INCLUDES)
 RM			=	rm -rf
 
-SRCS		=	megaphone.cpp
+SRCS		=	phone_book.cpp
 
 all:		$(NAME)
 
