@@ -10,6 +10,16 @@ class Contact
             : fname_(fname), lname_(lname), nick_(nick), phone_number_(phone_number), darkest_secret_(darkest_secret)
         {}
 
+        int add_fname(std::string str)
+        {
+            if (!str.empty())
+            {
+                fname_ = str;
+                return (0);
+            }
+            else
+                return (-1);
+        }
     private:
         std::string fname_;
         std::string lname_;
@@ -21,37 +31,59 @@ class Contact
 class PhoneBook
 {
     public:
-        PhoneBook(Contact* contact)
-        : contact_(contact)
-        {}
+        PhoneBook() {}
 
-    Contact* add_contact(Contact contact) const{
-        if (contact_)
+        void add_contact(Contact contact)
         {
-            while (true)
+            if (num < 8)
             {
-                if (contact_ == NULL)
-                    break;
-                contact_+ 1;
+                contact_[num] = contact;
+                num++;
             }
-            if (contact_ != NULL)
-                *contact_ = contact;
             else
             {
-                contact_ - 8;
-                *contact_ = contact;
+                num = 0;
+                contact_[num] = contact;
             }
         }
-        return (contact_);
-    }
+
+        Contact get_contact(int n)
+        {
+            if (&contact_[n] != nullptr)
+                return contact_[n];
+            else
+                return Contact();
+        }
     private:
         Contact *contact_ = new Contact[8];
+        int num = 0;
 };
 
 int main()
 {
-    std::string cum;
-    std::cout << "ADD, SEARCH OR EXIT: ";
-    std::cin >> cum;
-    std::cout << cum;
+    int valid = 0;
+    PhoneBook lista = PhoneBook();
+    std::string respuesta;
+    while (true)
+    {
+        std::cout << "ADD, SEARCH OR EXIT";
+        std::cin >> respuesta;
+        if (respuesta.compare("ADD") == 0)
+        {
+            Contact contacto = Contact();
+            std::system("clear");
+            std::cout << "First mame: ";
+            std::cin >> respuesta;
+            std::getline(std::cin, respuesta);
+            valid = contacto.add_fname(respuesta);
+            if (valid == -1)
+            {
+                std::cout << "Invalid name";
+                break;
+            }
+            
+        }
+    }
+    return 0;
 }
+
